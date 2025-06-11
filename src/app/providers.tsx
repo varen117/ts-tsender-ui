@@ -3,13 +3,13 @@
  */
 "use client"
 
-import {type ReactNode} from "react"
+import {useState, type ReactNode} from "react"
 import config from "@/rainbowkitConfig"
 import {WagmiProvider} from "wagmi"
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit"
+import { RainbowKitProvider, ConnectButton } from "@rainbow-me/rainbowkit"
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
+import "@rainbow-me/rainbowkit/styles.css"
 
-const queryClient = new QueryClient()
 /**
  * ------------------------------------------------------------------
 wagmi 是一个用于构建 Web3 应用的 React 库，它封装了 Ethers.js，提供了 React 风格的 hooks（比如 useAccount, useConnect, useContractRead 等）来和以太坊交互。WagmiProvider 是 wagmi 的上下文提供者，必须包裹在你的应用顶层组件中，这样下面的组件才能使用 wagmi 的所有功能。
@@ -29,6 +29,7 @@ QueryClientProvider 是来自 @tanstack/react-query 的一个组件，它的作�
 
  */
 export function Providers(props: {children: ReactNode}) {
+    const [queryClient] = useState(() => new QueryClient)
     return (
         <WagmiProvider config={config}>
             <QueryClientProvider client={queryClient}>
@@ -37,6 +38,5 @@ export function Providers(props: {children: ReactNode}) {
                 </RainbowKitProvider>
             </QueryClientProvider>
         </WagmiProvider>
-
     )
 }

@@ -1,8 +1,11 @@
+import AirdropForm from "@/components/AirdropForm"
+import InputField from "@/components/ui/InputField"
 
 export default function Home() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <AirdropForm />
+      <InputField/>
     </div>
   );
 }

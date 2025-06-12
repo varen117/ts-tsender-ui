@@ -37,9 +37,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ------------------------------------------------------------------------------------------------------------
 
-# 安装next-app
+## 安装next-app
 ```shell
 pnpm create next-app@latest
+```
+## wagmi核心库
+```shell
+pnpm add @wagmi/core
 ```
 # 目录解释
 
@@ -87,3 +91,28 @@ pnpm create next-app@latest
 
 ---
 
+### useMemo 的作用
+
+`useMemo` 是 React 的一个 Hook，用于**缓存计算结果**，只有依赖项发生变化时才会重新计算。  
+常用于**性能优化**，避免在每次渲染时都执行开销较大的计算。
+
+**用法示例：**
+```js
+const expensiveValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+```
+只有 `a` 或 `b` 变化时，`computeExpensiveValue` 才会重新执行。
+
+---
+
+### useMemo 和 useState 的区别
+
+|            | useMemo                                      | useState                        |
+|------------|----------------------------------------------|---------------------------------|
+| 作用       | 缓存计算结果，优化性能                        | 存储和管理组件的本地状态        |
+| 触发更新   | 依赖项变化时重新计算                          | 调用 setState 时更新            |
+| 用途       | 记忆值（通常是计算结果）                      | 记忆值（通常是用户输入、数据等）|
+| 典型场景   | 复杂/耗时计算、依赖变化时才重新计算            | 组件内部数据的增删改查          |
+
+**一句话总结：**  
+- `useMemo` 用于缓存和复用计算结果，提升性能；  
+- `useState` 用于存储和更新组件的本地状态。
